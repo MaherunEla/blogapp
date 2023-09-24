@@ -17,6 +17,7 @@
 }
 .links {
   display: flex;
+  text-align: center;
   gap: 20px;
   flex: 1;
   font-size: 20px;
