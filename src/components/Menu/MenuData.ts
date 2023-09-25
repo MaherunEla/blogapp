@@ -1,0 +1,38 @@
+export const MenuData = [
+  {
+    id: 1,
+    title: "Travel",
+    image: "/culture.png",
+    subtitle: "Lorem ipsum dolor sit amet consectetur adipising elit.",
+    author: "John Due",
+    date: "01/09/2023",
+    color: "bg-[#ff7857]",
+  },
+  {
+    id: 2,
+    title: "Culture",
+    image: "/culture.png",
+    subtitle: "Lorem ipsum dolor sit amet consectetur adipising elit.",
+    author: "John Due",
+    color: "bg-[#ffb14f]",
+    date: "01/09/2023",
+  },
+  {
+    id: 3,
+    title: "Coding",
+    image: "/culture.png",
+    subtitle: "Lorem ipsum dolor sit amet consectetur adipising elit.",
+    author: "John Due",
+    date: "01/09/2023",
+    color: "bg-[#775aec]",
+  },
+  {
+    id: 4,
+    title: "Fashion",
+    image: "/culture.png",
+    subtitle: "Lorem ipsum dolor sit amet consectetur adipising elit.",
+    author: "John Due",
+    date: "01/09/2023",
+    color: "bg-[#ff7887]",
+  },
+];

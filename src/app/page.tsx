@@ -1,15 +1,15 @@
 import Image from "next/image";
-import styles from "./homepage.module.css";
+
 import Featured from "@/components/featured/Featured";
 import CategoryList from "@/components/categoryList/CategoryList";
 import CardList from "@/components/cardList/CardList";
 import Menu from "@/components/Menu/Menu";
 export default function Home() {
   return (
-    <main className={styles.container}>
+    <main>
       <Featured />
       <CategoryList />
-      <div className={styles.content}>
+      <div className="flex justify-between gap-10 pt-10">
         <CardList />
         <Menu />
       </div>
