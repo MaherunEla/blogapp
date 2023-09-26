@@ -24,7 +24,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.dark{
+.dark {
   --bg: #0f172a;
   --textColor: #ddd;
   --softBg: #1f273a;
@@ -69,4 +69,32 @@ a {
   .wrapper {
     max-width: 475px;
   }
+}
+
+.ql-container {
+  font-size: 28px !important;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: #b3b3b1;
+}
+.style {
+  background-color: #57c4ff31;
+}
+
+.fashion {
+  background-color: #da85c731;
+}
+
+.travel {
+  background-color: #ff795736;
+}
+
+.food {
+  background-color: #7fb88133;
+}
+.culture {
+  background-color: #ffb04f45;
+}
+.coding {
+  background-color: #5e4fff31;
 }

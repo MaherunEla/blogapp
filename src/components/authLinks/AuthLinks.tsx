@@ -2,20 +2,25 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { BiMenu } from "react-icons/bi";
-
+import { signOut, useSession } from "next-auth/react";
 const AuthLinks = () => {
-  const status = "authenticated";
+  const { status } = useSession();
   const [open, setOpen] = useState(false);
   return (
     <>
-      {status != "authenticated" ? (
+      {status === "unauthenticated" ? (
         <Link href="/login">Login</Link>
       ) : (
         <>
           <Link href="/write" className="hidden sm:flex">
             Write
           </Link>
-          <span className=" hidden sm:flex cursor-pointer">Logout</span>
+          <span
+            onClick={() => signOut()}
+            className=" hidden sm:flex cursor-pointer"
+          >
+            Logout
+          </span>
         </>
       )}
       <div className="flex sm:hidden w-5 h-4" onClick={() => setOpen(!open)}>
