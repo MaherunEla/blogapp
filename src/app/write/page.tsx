@@ -4,26 +4,61 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-
-const page = () => {
+import { useSession } from "next-auth/react";
+import { uploadImages } from "@/utils/uploadImage";
+const Page = () => {
+  const { status } = useSession();
+  const [file, setFile] = useState(null);
+  const [media, setMedia] = useState("");
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
-  const { data, status } = useSession();
+  const [title, setTitle] = useState("");
+
   // console.log(data, status);
   const router = useRouter();
 
   if (status === "loading") {
     return <div>Loading...</div>;
   }
-  if (status === "authenticated") {
+  if (status != "authenticated") {
     router.push("/");
   }
+
+  const slugify = (str: string) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const handleSubmit = async () => {
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: "travel",
+      }),
+    });
+    console.log(res);
+  };
+  console.log({
+    title,
+    desc: value,
+    img: media,
+    slug: slugify(title),
+    catSlug: "travel",
+  });
 
   return (
     <div>
       <input
         type="text"
         placeholder="Title"
+        onChange={(e) => setTitle(e.target.value)}
         className="p-[50px] text-5xl border-none outline-none bg-transparent placeholder-[#b3b3b1]"
       />
       <div className="flex items-start justify-start gap-5 h-[700px] relative">
@@ -32,10 +67,26 @@ const page = () => {
         </button>
         {open && (
           <div className="flex gap-5 bg-[var(--bg)] absolute z-[999] w-full left-[50px]">
+            <input
+              type="file"
+              id="image"
+              onChange={async (e: any) => {
+                const file = e.target.files[0];
+                // setFile(e.target.files[0]);
+
+                const res = await uploadImages(file, () => {});
+                console.log(res);
+
+                setMedia(res?.url);
+              }}
+              style={{ display: "none" }}
+            />
             <button className="border-[#1a8917] w-[36px] h-[36px] flex items-center justify-center rounded-[50%] bg-transparent border border-[var(--textColor)]">
-              <div className="relative w-[16px] h-[16px]">
-                <Image src="/image.png" fill alt="image" />
-              </div>
+              <label htmlFor="image">
+                <div className="relative w-[16px] h-[16px]">
+                  <Image src="/image.png" fill alt="image" />
+                </div>
+              </label>
             </button>
             <button className="border-[#1a8917] w-[36px] h-[36px] flex items-center justify-center rounded-[50%] bg-transparent border border-[var(--textColor)]">
               <div className="relative w-[16px] h-[16px]">
@@ -57,11 +108,14 @@ const page = () => {
           placeholder="Tell your story..."
         />
       </div>
-      <button className="absolute top-8 right-5 py-[10px] px-5 bg-green-700 rounded-[20px] text-white">
+      <button
+        onClick={handleSubmit}
+        className="absolute top-8 right-5 py-[10px] px-5 bg-green-700 rounded-[20px] text-white"
+      >
         Publish
       </button>
     </div>
   );
 };
 
-export default page;
+export default Page;
