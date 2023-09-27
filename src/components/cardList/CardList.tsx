@@ -30,24 +30,6 @@ const CardList = async ({ page, cat }) => {
       <div className="flex flex-col gap-10">
         {posts.map((item) => (
           <Card key={item.id} item={item} />
-          // <div className="flex gap-10" key={item.id}>
-          //   <div className="relative hidden lg:flex flex-1 h-[400px]">
-          //     <Image src={item.img} fill alt="image" />
-          //   </div>
-          //   <div className="flex flex-col flex-1 gap-5">
-          //     <p className="uppercase text-[#626262]">
-          //       {item.createdAt} -
-          //       <span className="text-red-500 font-semibold">
-          //         {item.catSlug}
-          //       </span>
-          //     </p>
-          //     <h2 className="font-bold text-4xl">{item.title}</h2>
-          //     <p className="text-[#626262]">{item.desc}</p>
-          //     <button className="w-fit p-1 font-semibold border-b-4 border-b-red-500">
-          //       Read More
-          //     </button>
-          //   </div>
-          // </div>
         ))}
       </div>
 

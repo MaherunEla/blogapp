@@ -45,7 +45,7 @@ const page = async ({ params }) => {
       <div className="flex justify-between gap-20 py-20">
         <div className="flex-1">
           <div className="font-normal text-lg"></div>
-          <Comments />
+          <Comments postSlug={slug} />
         </div>
         <div>
           <Menu />
