@@ -2,10 +2,27 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { QueryClient, useQueryClient, useQuery } from "@tanstack/react-query";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { useSession } from "next-auth/react";
 import { uploadImages } from "@/utils/uploadImage";
+import axios from "axios";
+
+const fetchCategory = () => {
+  return axios.get("http://localhost:3000/api/categories");
+};
+
+// const getData = async () => {
+//   const res = await fetch("http://localhost:3000/api/categories", {
+//     cache: "no-store",
+//   });
+//   if (!res.ok) {
+//     throw new Error("Failed");
+//   }
+//   return res.json();
+// };
+
 const Page = () => {
   const { status } = useSession();
   const [file, setFile] = useState(null);
@@ -13,7 +30,12 @@ const Page = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
-
+  const [category, setCategory] = useState("");
+  const categoryresult = useQuery({
+    queryKey: ["category-data"],
+    queryFn: fetchCategory,
+  });
+  console.log(categoryresult?.data?.data);
   // console.log(data, status);
   const router = useRouter();
 
@@ -45,13 +67,13 @@ const Page = () => {
     });
     console.log(res);
   };
-  console.log({
-    title,
-    desc: value,
-    img: media,
-    slug: slugify(title),
-    catSlug: "travel",
-  });
+  // console.log({
+  //   title,
+  //   desc: value,
+  //   img: media,
+  //   slug: slugify(title),
+  //   catSlug: "travel",
+  // });
 
   return (
     <div>
@@ -61,6 +83,7 @@ const Page = () => {
         onChange={(e) => setTitle(e.target.value)}
         className="p-[50px] text-5xl border-none outline-none bg-transparent placeholder-[#b3b3b1]"
       />
+
       <div className="flex items-start justify-start gap-5 h-[700px] relative">
         <button className=" " onClick={() => setOpen(!open)}>
           <Image src="/plus.png" alt="" width={16} height={16} />
@@ -107,7 +130,27 @@ const Page = () => {
           onChange={setValue}
           placeholder="Tell your story..."
         />
+        {/* <div>
+     <select
+        className=""
+        // onClick={async () => {
+        //   const data = await getData();
+        //   setCategory(data);
+        //   console.log(category);
+        // }}
+      >
+        <option selected value="0">
+          Select Category
+        </option>
+        {categoryresult?.data?.data.map((item, index) => (
+          <option value={item.id} key={index} onClick={()=> {setCategory({item.title})}}>
+            {item.title}
+          </option>
+        ))}
+      </select> 
+     </div> */}
       </div>
+
       <button
         onClick={handleSubmit}
         className="absolute top-8 right-5 py-[10px] px-5 bg-green-700 rounded-[20px] text-white"
