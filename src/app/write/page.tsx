@@ -90,14 +90,14 @@ const Page = () => {
       />
 
       <div className="flex items-start justify-start gap-5 h-[700px] relative">
-        <button className=" " onClick={() => setOpen(!open)}>
+        <button
+          className="border-[#1a8917] w-[36px] h-[36px] flex items-center justify-center rounded-[50%] bg-transparent border border-[var(--textColor)]"
+          onClick={() => setOpen(!open)}
+        >
           <Image src="/plus.png" alt="" width={16} height={16} />
         </button>
         {open && (
-          <div className="flex gap-5 bg-[var(--bg)] absolute z-[999] w-full left-[50px]">
-            {preview && (
-              <Image src={preview} width={400} height={400} alt="image" />
-            )}
+          <div className=" flex gap-5 bg-[var(--bg)] absolute z-[999] w-[500px] left-[50px]">
             <input
               type="file"
               id="image"
@@ -134,12 +134,15 @@ const Page = () => {
           </div>
         )}
         <ReactQuill
-          className="w-full"
+          className="w-[600px] mt-10"
           theme="bubble"
           value={value}
           onChange={setValue}
           placeholder="Tell your story..."
         />
+        {preview && (
+          <Image src={preview} width={400} height={400} alt="image" />
+        )}
       </div>
       <select
         className="px-5 py-5 text-red-500 font-bold"

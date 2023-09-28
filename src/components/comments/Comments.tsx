@@ -35,7 +35,7 @@ const Comments = ({ postSlug }) => {
       {status === "authenticated" ? (
         <div className="flex items-center gap-5 py-10 ">
           <textarea
-            className="flex-1 py-5 px-2 border border-slate-200"
+            className="flex-1 py-5 px-2 border border-slate-200 outline-none text-black"
             placeholder="write a comment..."
             onChange={(e) => setDesc(e.target.value)}
           />
@@ -64,7 +64,7 @@ const Comments = ({ postSlug }) => {
                     />
                   </div>
                   <div className="flex flex-col gap-2 ">
-                    <span>{item.user.name}</span>
+                    <span className="font-medium">{item.user.name}</span>
                     <span>{item.createdAt.substring(0, 10)}</span>
                   </div>
                 </div>

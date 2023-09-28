@@ -31,7 +31,7 @@ const page = async ({ params }) => {
               />
             </div>
             <div className="text-xl font-normal">
-              <p>{data?.user?.name}</p>
+              <p className="font-medium">{data?.user?.name}</p>
               <p>{data?.user?.emailVerified}</p>
             </div>
           </div>

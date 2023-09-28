@@ -37,7 +37,7 @@ const Menu = async () => {
           <Link href={`/post/${item.slug}`} key={index}>
             <div className="flex flex-col gap-2">
               <p
-                className={`${item.catSlug} w-fit py-2 px-4 text-white  rounded-[50px]`}
+                className={` w-fit py-2 px-4 text-[var(textColor)] font-semibold  rounded-[50px] ${item.catSlug}`}
               >
                 {item.catSlug}
               </p>
