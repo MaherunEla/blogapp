@@ -45,7 +45,10 @@ const Page = () => {
   if (status != "authenticated") {
     router.push("/");
   }
-
+  const addSelect = (e) => {
+    setCategory(e.target.value);
+    console.log(setCategory);
+  };
   const slugify = (str: string) =>
     str
       .toLowerCase()
@@ -62,18 +65,18 @@ const Page = () => {
         desc: value,
         img: media,
         slug: slugify(title),
-        catSlug: "travel",
+        catSlug: category,
       }),
     });
     console.log(res);
   };
-  // console.log({
-  //   title,
-  //   desc: value,
-  //   img: media,
-  //   slug: slugify(title),
-  //   catSlug: "travel",
-  // });
+  console.log({
+    title,
+    desc: value,
+    img: media,
+    slug: slugify(title),
+    catSlug: category,
+  });
 
   return (
     <div>
@@ -130,25 +133,26 @@ const Page = () => {
           onChange={setValue}
           placeholder="Tell your story..."
         />
-        {/* <div>
-     <select
-        className=""
-        // onClick={async () => {
-        //   const data = await getData();
-        //   setCategory(data);
-        //   console.log(category);
-        // }}
-      >
-        <option selected value="0">
-          Select Category
-        </option>
-        {categoryresult?.data?.data.map((item, index) => (
-          <option value={item.id} key={index} onClick={()=> {setCategory({item.title})}}>
-            {item.title}
+
+        <select
+          className="px-5 py-5 text-red-500 font-bold"
+          // onClick={async () => {
+          //   const data = await getData();
+          //   setCategory(data);
+          //   console.log(category);
+          // }}
+          onChange={addSelect}
+        >
+          <option selected value="0">
+            Select Category
           </option>
-        ))}
-      </select> 
-     </div> */}
+          {/* <option value="travel">travel</option> */}
+          {categoryresult?.data?.data.map((item, index) => (
+            <option value={item.slug} key={index}>
+              {item.title}
+            </option>
+          ))}
+        </select>
       </div>
 
       <button
