@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
-const fetcher = async (url) => {
+const fetcher = async (url: any) => {
   const res = await fetch(url);
   const data = await res.json();
   if (!res.ok) {
@@ -13,7 +13,10 @@ const fetcher = async (url) => {
   }
   return data;
 };
-const Comments = ({ postSlug }) => {
+type Props = {
+  postSlug: any;
+};
+const Comments = ({ postSlug }: Props) => {
   const { status } = useSession();
 
   const { data, mutate, isLoading } = useSWR(
@@ -52,7 +55,7 @@ const Comments = ({ postSlug }) => {
       <div className="flex flex-col gap-10">
         {isLoading
           ? "loading"
-          : data?.map((item) => (
+          : data?.map((item: any) => (
               <div className="flex flex-col gap-6" key={item.id}>
                 <div className="flex gap-5">
                   <div className="relative w-[60px] h-[60px]">

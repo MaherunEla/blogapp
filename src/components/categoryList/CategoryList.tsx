@@ -15,12 +15,12 @@ const getData = async () => {
 
 const CategoryList = async () => {
   const data = await getData();
-  console.log(data);
+
   return (
     <div>
       <h1 className="my-[50px] text-3xl font-bold">Popular Categories</h1>
       <div className="flex flex-wrap justify-between gap-5">
-        {data.map((item) => (
+        {data?.categories?.map((item: any) => (
           <Link
             href={`/blog?cat=${item.slug}`}
             className={`flex items-center gap-[10px] font-semibold sm:w-[15%] w-full md:w-[25%] lg:w-[50%] xl:w-[15%] h-[80px] justify-center rounded-[10px] ${item.slug}`}

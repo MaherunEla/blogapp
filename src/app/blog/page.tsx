@@ -1,8 +1,10 @@
 import Menu from "@/components/Menu/Menu";
 import CardList from "@/components/cardList/CardList";
 import React from "react";
-
-const page = ({ searchParams }) => {
+type Props = {
+  searchParams: any;
+};
+const page = ({ searchParams }: Props) => {
   const page = parseInt(searchParams.page) || 1;
   const { cat } = searchParams;
   console.log(cat);

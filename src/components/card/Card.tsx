@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-const Card = ({ key, item }) => {
+type Props = {
+  key: any;
+  item: any;
+};
+const Card = ({ key, item }: Props) => {
   return (
     <div className="flex gap-10" key={key}>
       <div className="relative hidden lg:flex flex-1 h-[400px]">

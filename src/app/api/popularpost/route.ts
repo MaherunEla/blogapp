@@ -1,7 +1,7 @@
 import prisma from "@/utils/connect";
 import { NextResponse } from "next/server";
 
-export const GET = async (req) => {
+export const GET = async (req: any) => {
   // const query = {
   //   orderBy: { views: "desc" },
   //   take: 5,
@@ -19,11 +19,11 @@ export const GET = async (req) => {
     //   orderBy: { posts: { skip: 0, take: 5 } },
     // });
 
-    return new NextResponse(JSON.stringify(posts, { status: 200 }));
+    return new NextResponse(JSON.stringify({ posts, status: 200 }));
   } catch (err) {
     console.log(err);
     return new NextResponse(
-      JSON.stringify({ message: "SomeThing went wrong!" }, { status: 500 })
+      JSON.stringify({ message: "SomeThing went wrong!", status: 500 })
     );
   }
 };

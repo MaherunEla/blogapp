@@ -32,7 +32,7 @@ const Page = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState<string>();
   const categoryresult = useQuery({
     queryKey: ["category-data"],
     queryFn: fetchCategory,
@@ -47,7 +47,7 @@ const Page = () => {
   if (status != "authenticated") {
     router.push("/");
   }
-  const addSelect = (e) => {
+  const addSelect = (e: any) => {
     setCategory(e.target.value);
     console.log(setCategory);
   };
@@ -157,7 +157,7 @@ const Page = () => {
           Select Category
         </option>
         {/* <option value="travel">travel</option> */}
-        {categoryresult?.data?.data.map((item, index) => (
+        {categoryresult?.data?.data.map((item: any, index: number) => (
           <option value={item.slug} key={index}>
             {item.title}
           </option>

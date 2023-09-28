@@ -25,15 +25,16 @@ const getCatData = async () => {
 
 const Menu = async () => {
   const data = await getData();
-  console.log(data);
+  console.log({ data });
   const catdata = await getCatData();
-  console.log(catdata);
+  console.log({ catdata });
+  // return null;
   return (
     <div className="hidden md:flex flex-col w-full xl:w-[400px]  ">
       <h6>What&apos;s hot</h6>
       <h1 className="text-3xl font-bold pb-5">Most Popular</h1>
       <div className="flex flex-col gap-10 pb-10">
-        {data.map((item, index) => (
+        {data?.posts?.map((item: any, index: number) => (
           <Link href={`/post/${item.slug}`} key={index}>
             <div className="flex flex-col gap-2">
               <p
@@ -56,7 +57,7 @@ const Menu = async () => {
         <h6 className="pb-1 text-[#626262] font-normal">Discover by topic</h6>
         <h1 className="text-3xl font-bold pb-10">Categories</h1>
         <div className="grid grid-cols-3 gap-10 ">
-          {catdata.map((item, index) => (
+          {catdata?.categories?.map((item: any, index: number) => (
             <Link href={`/blog?cat=${item.slug}`} key={index}>
               <p
                 className={`${item.slug} p-4 rounded-[10px] font-medium flex items-center justify-center`}

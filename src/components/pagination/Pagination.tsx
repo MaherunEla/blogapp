@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const Pagination = ({ page, hasPrev, hasNext }) => {
+const Pagination = ({ page, hasPrev, hasNext }: any) => {
   const router = useRouter();
   return (
     <div className="flex justify-between py-10">

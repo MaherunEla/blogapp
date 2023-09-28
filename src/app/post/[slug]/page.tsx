@@ -2,7 +2,7 @@ import Menu from "@/components/Menu/Menu";
 import Comments from "@/components/comments/Comments";
 import Image from "next/image";
 import React from "react";
-const getData = async (slug) => {
+const getData = async (slug: any) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
     cache: "no-store",
   });
@@ -11,7 +11,10 @@ const getData = async (slug) => {
   }
   return res.json();
 };
-const page = async ({ params }) => {
+type Props = {
+  params: any;
+};
+const page = async ({ params }: Props) => {
   const { slug } = params;
   const data = await getData(slug);
   console.log({ data });
