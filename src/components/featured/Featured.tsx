@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Featured = () => {
@@ -21,9 +22,11 @@ const Featured = () => {
             laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
             quisquam! Harum unde sit culpa debitis.
           </p>
-          <button className="py-[16px] px-[20px] rounded-[5px] w-fit  text-[var(--textColor)] bg-[var(--softBg)]">
-            Read More
-          </button>
+          <Link href={`/blog?cat=travel`}>
+            <button className="py-[16px] px-[20px] rounded-[5px] w-fit  text-[var(--textColor)] bg-[var(--softBg)]">
+              Read More
+            </button>
+          </Link>
         </div>
       </div>
     </div>

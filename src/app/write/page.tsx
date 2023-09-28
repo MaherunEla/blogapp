@@ -31,6 +31,8 @@ const Page = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
+  const [preview, setPreview] = useState(null);
   const categoryresult = useQuery({
     queryKey: ["category-data"],
     queryFn: fetchCategory,
@@ -93,15 +95,20 @@ const Page = () => {
         </button>
         {open && (
           <div className="flex gap-5 bg-[var(--bg)] absolute z-[999] w-full left-[50px]">
+            {preview && (
+              <Image src={preview} width={400} height={400} alt="image" />
+            )}
             <input
               type="file"
               id="image"
               onChange={async (e: any) => {
                 const file = e.target.files[0];
+
                 // setFile(e.target.files[0]);
 
                 const res = await uploadImages(file, () => {});
                 console.log(res);
+                setPreview(URL.createObjectURL(file));
 
                 setMedia(res?.url);
               }}
@@ -133,27 +140,26 @@ const Page = () => {
           onChange={setValue}
           placeholder="Tell your story..."
         />
-
-        <select
-          className="px-5 py-5 text-red-500 font-bold"
-          // onClick={async () => {
-          //   const data = await getData();
-          //   setCategory(data);
-          //   console.log(category);
-          // }}
-          onChange={addSelect}
-        >
-          <option selected value="0">
-            Select Category
-          </option>
-          {/* <option value="travel">travel</option> */}
-          {categoryresult?.data?.data.map((item, index) => (
-            <option value={item.slug} key={index}>
-              {item.title}
-            </option>
-          ))}
-        </select>
       </div>
+      <select
+        className="px-5 py-5 text-red-500 font-bold"
+        // onClick={async () => {
+        //   const data = await getData();
+        //   setCategory(data);
+        //   console.log(category);
+        // }}
+        onChange={addSelect}
+      >
+        <option selected value="0">
+          Select Category
+        </option>
+        {/* <option value="travel">travel</option> */}
+        {categoryresult?.data?.data.map((item, index) => (
+          <option value={item.slug} key={index}>
+            {item.title}
+          </option>
+        ))}
+      </select>
 
       <button
         onClick={handleSubmit}
