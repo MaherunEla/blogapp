@@ -2,12 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 type Props = {
-  key: any;
   item: any;
 };
-const Card = ({ key, item }: Props) => {
+const Card = ({ item }: Props) => {
   return (
-    <div className="flex gap-10" key={key}>
+    <div>
       <div className="relative hidden lg:flex flex-1 h-[400px]">
         <Image src={item.img} fill alt="image" />
       </div>

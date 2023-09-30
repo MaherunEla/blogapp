@@ -33,7 +33,9 @@ const CardList = async ({ page, cat }: Props) => {
       <h1 className="pb-10 font-bold text-3xl">Recent Post</h1>
       <div className="flex flex-col gap-10">
         {posts.map((item: any) => (
-          <Card key={item.id} item={item} />
+          <div className="flex gap-10" key={item.id}>
+            <Card item={item} />
+          </div>
         ))}
       </div>
 

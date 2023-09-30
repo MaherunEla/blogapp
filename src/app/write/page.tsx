@@ -33,11 +33,11 @@ const Page = () => {
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState<string>();
-  const categoryresult = useQuery({
+  const { data } = useQuery({
     queryKey: ["category-data"],
     queryFn: fetchCategory,
   });
-  console.log(categoryresult?.data?.data);
+  console.log(data?.data?.categories);
   // console.log(data, status);
   const router = useRouter();
 
@@ -89,7 +89,7 @@ const Page = () => {
         className="p-[50px] text-5xl border-none outline-none bg-transparent placeholder-[#b3b3b1]"
       />
 
-      <div className="flex items-start justify-start gap-5 h-[700px] relative">
+      <div className="flex items-start justify-start gap-5 h-[300px] md:h-[400px] xl:h-[700px] relative">
         <button
           className="border-[#1a8917] w-[36px] h-[36px] flex items-center justify-center rounded-[50%] bg-transparent border border-[var(--textColor)]"
           onClick={() => setOpen(!open)}
@@ -97,7 +97,7 @@ const Page = () => {
           <Image src="/plus.png" alt="" width={16} height={16} />
         </button>
         {open && (
-          <div className=" flex gap-5 bg-[var(--bg)] absolute z-[999] w-[500px] left-[50px]">
+          <div className="  flex gap-5 bg-[var(--bg)] absolute z-[999] w-[200px]  xl:w-[500px] left-[50px]">
             <input
               type="file"
               id="image"
@@ -133,19 +133,28 @@ const Page = () => {
             </button>
           </div>
         )}
+
         <ReactQuill
-          className="w-[600px] mt-10"
+          className="w-[200px] lg:w-[300px] xl:w-[600px] mt-10"
           theme="bubble"
           value={value}
           onChange={setValue}
           placeholder="Tell your story..."
         />
         {preview && (
-          <Image src={preview} width={400} height={400} alt="image" />
+          <div className="relative hidden lg:flex lg:w-[300px] lg:h-[300px] xl:w-[400px] xl:h-[400px] my-10">
+            <Image src={preview} fill alt="image" />
+          </div>
         )}
       </div>
+      {preview && (
+        <div className="relative w-full h-[300px] lg:hidden my-10">
+          <Image src={preview} fill alt="image" />
+        </div>
+      )}
+
       <select
-        className="px-5 py-5 text-red-500 font-bold"
+        className="px-5 py-5 text-red-500 font-bold mt-5"
         // onClick={async () => {
         //   const data = await getData();
         //   setCategory(data);
@@ -157,7 +166,7 @@ const Page = () => {
           Select Category
         </option>
         {/* <option value="travel">travel</option> */}
-        {categoryresult?.data?.data.map((item: any, index: number) => (
+        {data?.data?.categories.map((item: any, index: number) => (
           <option value={item.slug} key={index}>
             {item.title}
           </option>
