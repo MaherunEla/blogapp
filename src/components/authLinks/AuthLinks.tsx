@@ -28,7 +28,7 @@ const AuthLinks = () => {
       </div>
       {open && (
         <div
-          className={`absolute flex flex-col items-center justify-center gap-[50px] text-4xl z-[999] top-[100px] left-0 bg-white h-[calc(100vh-100px)] w-full `}
+          className={`absolute flex flex-col items-center justify-center gap-[50px] text-4xl z-[999] top-[100px] left-0 bg-[var(--bg)] h-[calc(100vh-100px)] w-full `}
         >
           <Link href="/">Homepage</Link>
           <Link href="/">About</Link>

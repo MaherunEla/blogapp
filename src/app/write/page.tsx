@@ -3,11 +3,16 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { QueryClient, useQueryClient, useQuery } from "@tanstack/react-query";
-import ReactQuill from "react-quill";
+
 import "react-quill/dist/quill.bubble.css";
 import { useSession } from "next-auth/react";
 import { uploadImages } from "@/utils/uploadImage";
 import axios from "axios";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 const fetchCategory = () => {
   return axios.get("http://localhost:3000/api/categories");
