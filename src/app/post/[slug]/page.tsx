@@ -17,31 +17,36 @@ type Props = {
 const page = async ({ params }: Props) => {
   const { slug } = params;
   const data = await getData(slug);
-  console.log({ data });
+  console.log(data?.post);
 
   return (
     <div>
       <div className="flex justify-between gap-16">
         <h1 className="flex-1 text-5xl font-black  leading-[70px] pb-1">
-          {data.title}
+          {data?.post.title}
           <div className="flex gap-2 pt-3">
             <div className="relative w-[60px] h-[60px]">
               <Image
-                src={data?.user?.image}
+                src={data?.post.user?.image}
                 fill
                 alt="image"
                 className="rounded-full"
               />
             </div>
             <div className="text-xl font-normal">
-              <p className="font-medium">{data?.user?.name}</p>
-              <p>{data?.user?.emailVerified}</p>
+              <p className="font-medium">{data?.post.user?.name}</p>
+              <p>{data?.post.user?.emailVerified}</p>
             </div>
           </div>
         </h1>
 
         <div className="relative flex-1 h-[300px]">
-          <Image src={data.img} fill alt="image" className="rounded-[10px]" />
+          <Image
+            src={data?.post.img}
+            fill
+            alt="image"
+            className="rounded-[10px]"
+          />
         </div>
       </div>
 
