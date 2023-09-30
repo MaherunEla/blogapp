@@ -15,11 +15,11 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 });
 
 const fetchCategory = () => {
-  return axios.get("http://localhost:3000/api/categories");
+  return axios.get("/api/categories");
 };
 
 // const getData = async () => {
-//   const res = await fetch("http://localhost:3000/api/categories", {
+//   const res = await fetch("/api/categories", {
 //     cache: "no-store",
 //   });
 //   if (!res.ok) {
