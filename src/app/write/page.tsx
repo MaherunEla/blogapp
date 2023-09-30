@@ -43,7 +43,7 @@ const Page = () => {
     queryFn: fetchCategory,
   });
   console.log(data?.data?.categories);
-  // console.log(data, status);
+
   const router = useRouter();
 
   if (status === "loading") {
